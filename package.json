@@ -1,0 +1,11 @@
+{
+  "name": "nodejs-and-cors-example",
+  "type": "module",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js"
+  },
+  "devDependencies": {
+    "@types/node": "^15.12.2"
+  }
+}

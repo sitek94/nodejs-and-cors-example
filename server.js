@@ -6,7 +6,7 @@ const server = http.createServer((req, res) => {
   res.end();
 });
 
-server.listen(3000, error => {
+server.listen(process.env.PORT || 3000, error => {
   if (error) {
     console.error('Something went wrong', error);
   } else {

@@ -1,15 +1,20 @@
-import http from 'http';
+const fs = require('fs');
+const http = require('http');
+const https = require('https');
 
-const server = http.createServer((req, res) => {
-  res.writeHead(200);
-  res.write('Hello');
-  res.end();
+const privateKey  = fs.readFileSync('/mnt/c/Users/sitek/.localhost-ssl/localhost.key', 'utf8');
+const certificate = fs.readFileSync('/mnt/c/Users/sitek/.localhost-ssl/localhost.crt', 'utf8');
+
+const credentials = {key: privateKey, cert: certificate};
+const express = require('express');
+const app = express();
+
+app.get('/', (req, res) => {
+  res.send('Hello World.');
 });
 
-server.listen(process.env.PORT || 3000, error => {
-  if (error) {
-    console.error('Something went wrong', error);
-  } else {
-    console.log('Server listening on PORT: 3000');
-  }
-});
+const httpServer = http.createServer(app);
+const httpsServer = https.createServer(credentials, app);
+
+httpServer.listen(8080);
+httpsServer.listen(8443);
